@@ -9,10 +9,12 @@ import Login from "../components/Login"
 import Modal from "@material-tailwind/react/Modal"
 import ModalBody from "@material-tailwind/react/ModalBody"
 import ModalFooter from "@material-tailwind/react/ModalFooter"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {db} from "../firebase"
 import firebase from "firebase/app"
 import { collection, setDoc, serverTimestamp, doc, getDocs, query } from "firebase/firestore"; 
+
+/************************ */
 
 const Home: NextPage = () => {
   const {data: session} = useSession(); 
@@ -37,42 +39,18 @@ const Home: NextPage = () => {
     setInput("");
     setShowModal(false);
   };
-
-  //V2**************************************************
-//   const [userDocs,setUserDocs] = useState(
-//     getDocs(userRef).then((response) => {
-//       response.docs.map((item) => {
-//         return {...item.data(),id:item.id}
-//       });
-//     })
-//   );
-
-//   const createDocument = async () => {
-//     if(!input) return;
-//     //I used setDoc(doc(userRef, input)) but failed in reading data.
-//     try {
-//       await addDoc(userRef, {
-//         fileName: input,
-//         timestamp: serverTimestamp()
-//       });
-//       console.log("Document written");
-//     } catch (e) {
-//       console.error("Error adding document: ", e);
-//     }
-//     setInput("");
-//     setShowModal(false);
-//   };
-  //V2**************************************************
   
-  const getData = () => {
+  useEffect(() => {
+    let docs = [];
     getDocs(userRef).then((response) => {
       console.log(
         response.docs.map((item) => {
-        return {...item.data(),id:item.id}
+          return ('fileName: '+item.data()["fileName"] +' CreationDate: '+item.data()["timestamp"].toDate());
         })
       );
     });
-  };
+  },[showModal]);
+    
 
   const modal = (
     <Modal 
@@ -146,7 +124,7 @@ const Home: NextPage = () => {
         </div>
         {/* listview display division */}
         <div>
-          
+          {userDocs}
         </div>
       </section>
     </div>
