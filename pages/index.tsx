@@ -140,7 +140,7 @@ const Home: NextPage = () => {
         <div className="max-w-3xl mx-auto py-8 text-sm text-gray-800">
           <div className="flex items-center justify-between">
             <h2 className="font-medium flex-grow">Recent documents</h2>
-            <p className="mr-12">Date Created</p>
+            <button className="mr-12 focus:outline-none p-1 px-2  rounded-md hover:bg-gray-100">Date Created</button>
             <Icon name="folder" size="3xl" color="gray"/>
           </div>
         </div>
