@@ -10,12 +10,6 @@ import Functionalities from "../../components/Functionalities";
 function Doc() {
 
     const [show, setShow] = useState(false)
-    // const [showMenu, setShowMenu] = useState(true)
-
-    const downloadTxtFile = () =>  {
-        const element = document.currentElement('a');
-        const file = new Blob([document.getElementById('userInput')])
-    }
 
   return (
     <>
