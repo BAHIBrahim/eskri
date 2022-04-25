@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react'
 import {db} from "../firebase"
 import firebase from "firebase/app"
 import { collection, setDoc, serverTimestamp, doc, getDocs, query } from "firebase/firestore"; 
+import { seteuid } from 'process'
 
 /************************ */
 
@@ -23,7 +24,7 @@ const Home: NextPage = () => {
   const [showModal,setShowModal] = useState(false);
   const [input,setInput] = useState("");
   const userRef = collection(db, session.user?.email);
-  const [userDocs,setUserDocs] = useState();
+  const [userDocs,setUserDocs] = useState([]);
 
   const createDocument = async () => {
     if(!input) return;
@@ -39,15 +40,19 @@ const Home: NextPage = () => {
     setInput("");
     setShowModal(false);
   };
-  
-  useEffect(() => {
+
+  /*************** */
+  useEffect(async () => {
     let docs = [];
-    getDocs(userRef).then((response) => {
-      console.log(
-        response.docs.map((item) => {
-          return ('fileName: '+item.data()["fileName"] +' CreationDate: '+item.data()["timestamp"].toDate());
-        })
-      );
+    const querySnapshot = await getDocs(userRef);
+    querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    docs.push({fileName: ""+doc.data().fileName, timestamp: ""+doc.data().timestamp.toDate()});
+    });
+
+    setUserDocs(docs);
+    userDocs.forEach((doc) => {
+      console.log(doc.fileName)
     });
   },[showModal]);
     
@@ -124,7 +129,7 @@ const Home: NextPage = () => {
         </div>
         {/* listview display division */}
         <div>
-          {userDocs}
+
         </div>
       </section>
     </div>
