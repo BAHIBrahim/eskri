@@ -6,7 +6,8 @@ import {signOut,useSession} from 'next-auth/react'
 import {useState} from 'react'
 import ClickAwayListener from '@mui/base/ClickAwayListener'
 
-function Header() {
+
+function Header(props) {
     const {data: session} = useSession();
     const [showSideBar,setShowSideBar] = useState(false);
 
@@ -73,7 +74,7 @@ function Header() {
             {/* search bar */}
             <div className="mx-5 md:mx-20 flex flex-grow items-center px-5 py-2 bg-gray-100 text-gray-600 rounded-lg focus-within:text-gray-700 focus-within:shadow-md focus-within:bg-white ">
                 <Icon name="search" size="3xl" color="gray"/>
-                <input type="text" placeholder="Search" className="flex-grow px-5 text-base bg-transparent outline-none"/>
+                <input id="search-input" type="text" placeholder="Search" className="flex-grow px-5 text-base bg-transparent outline-none" onChange={(e) => props.setSearchInput(e.target.value)}/>
             </div>
 
             {/* apps button */}

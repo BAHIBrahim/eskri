@@ -26,6 +26,8 @@ const Home: NextPage = () => {
   const [input,setInput] = useState("");
   const userRef = collection(db, session.user?.email);
   const [userDocs,setUserDocs] = useState([]);
+  const [desc,setDesc] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
 
   const createDocument = async () => {
     if(!input) return;
@@ -55,6 +57,20 @@ const Home: NextPage = () => {
       console.log(doc.fileName)
     });
   },[showModal]);
+
+  function searchAndFilter() {
+    let docs = userDocs;
+    docs.sort((a,b) => (new Date(b.timestamp) - new Date(a.timestamp)));
+    if(desc == false) {
+      docs.reverse();
+    }
+    if(searchInput != "") {
+      console.log(searchInput);
+      docs = docs.filter((doc) => doc.fileName.toLowerCase().includes(searchInput.toLowerCase()) );
+    }
+    return docs;
+
+  }
     
 
   const modal = (
@@ -85,7 +101,7 @@ const Home: NextPage = () => {
       <Head>
         <title>Docs Hybrid</title>
       </Head>
-      <Header/>
+      <Header setSearchInput={setSearchInput}/>
       {modal}
       {/* this section is where we find the add button and the central divisions */}
       <section className="bg-[#F8F9FA] pb-10 px-10">
@@ -123,13 +139,13 @@ const Home: NextPage = () => {
         <div className="max-w-3xl mx-auto py-8 text-sm text-gray-800">
           <div className="flex items-center justify-between">
             <h2 className="font-medium flex-grow">Recent documents</h2>
-            <button className="mr-12 focus:outline-none p-1 px-2  rounded-md hover:bg-gray-100">Date Created</button>
+            <button className="mr-12 focus:outline-none p-1 px-2  rounded-md hover:bg-gray-100" onClick={() => setDesc(!desc)}>Date Created</button>
             <Icon name="folder" size="3xl" color="gray"/>
           </div>
         </div>
         {/* listview display division */}
         <div>
-          <DocumentRow docs={userDocs}/>
+          <DocumentRow docs={searchAndFilter()}/>
         </div>
       </section>
     </div>

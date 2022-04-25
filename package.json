@@ -9,6 +9,8 @@
     "@material-tailwind/react": "0.3.4",
     "@mui/material": "^5.6.2",
     "firebase": "^9.6.11",
+    "jquery": "^3.6.0",
+    "jsdom": "^19.0.0",
     "next": "latest",
     "next-auth": "^4.3.2",
     "react": "^17.0.2",
@@ -16,6 +18,7 @@
     "react-firebase-hooks": "^5.0.3"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.14",
     "@types/node": "17.0.4",
     "@types/react": "17.0.38",
     "autoprefixer": "^10.4.0",
