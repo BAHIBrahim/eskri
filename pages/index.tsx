@@ -14,6 +14,7 @@ import {db} from "../firebase"
 import firebase from "firebase/app"
 import { collection, setDoc, serverTimestamp, doc, getDocs, query } from "firebase/firestore"; 
 import { seteuid } from 'process'
+import DocumentRow from "../components/DocumentRows"
 
 /************************ */
 
@@ -41,7 +42,6 @@ const Home: NextPage = () => {
     setShowModal(false);
   };
 
-  /*************** */
   useEffect(async () => {
     let docs = [];
     const querySnapshot = await getDocs(userRef);
@@ -129,7 +129,7 @@ const Home: NextPage = () => {
         </div>
         {/* listview display division */}
         <div>
-
+          <DocumentRow docs={userDocs}/>
         </div>
       </section>
     </div>
