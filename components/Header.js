@@ -68,7 +68,7 @@ function Header() {
             <div id="logo-icon" className="">
                 <Image src="/resources/LogoApp.png" height="48" width="48" objectFit="contain"/>
             </div>
-            <h1 className="ml-2 text-gray-700 text-2xl">Docs Hybrid</h1>
+            <h1 className="ml-2 text-gray-700 text-2xl">Eskri</h1>
 
             {/* search bar */}
             <div className="mx-5 md:mx-20 flex flex-grow items-center px-5 py-2 bg-gray-100 text-gray-600 rounded-lg focus-within:text-gray-700 focus-within:shadow-md focus-within:bg-white ">

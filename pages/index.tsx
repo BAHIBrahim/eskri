@@ -89,7 +89,7 @@ const Home: NextPage = () => {
       {modal}
       {/* this section is where we find the add button and the central divisions */}
       <section className="bg-[#F8F9FA] pb-10 px-10">
-        {/* this division is used to surround our divisions in the gray division */}
+        {/* this division is used to surround our divisions in the gray section */}
         <div className="max-w-3xl mx-auto">
           {/* Start a new Document division*/}
           <div className="flex items-center justify-between py-6">
