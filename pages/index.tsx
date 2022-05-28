@@ -14,7 +14,7 @@ import {db} from "../firebase"
 import firebase from "firebase/app"
 import { collection, setDoc, serverTimestamp, doc, getDocs, query } from "firebase/firestore"; 
 import { seteuid } from 'process'
-import DocumentRow from "../components/DocumentRows"
+import DocumentRows from "../components/DocumentRows"
 
 /************************ */
 
@@ -28,6 +28,7 @@ const Home: NextPage = () => {
   const [userDocs,setUserDocs] = useState([]);
   const [desc,setDesc] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [refresher, setRefresher] = useState(false);
 
   const createDocument = async () => {
     if(!input) return;
@@ -56,7 +57,7 @@ const Home: NextPage = () => {
     userDocs.forEach((doc) => {
       console.log(doc.fileName)
     });
-  },[showModal]);
+  },[showModal,refresher]);
 
   function searchAndFilter() {
     let docs = userDocs;
@@ -145,7 +146,7 @@ const Home: NextPage = () => {
         </div>
         {/* listview display division */}
         <div>
-          <DocumentRow docs={searchAndFilter()}/>
+          <DocumentRows docs={searchAndFilter()} session={session} db={db} refresher={refresher} setRefresher={setRefresher}/>
         </div>
       </section>
     </div>
