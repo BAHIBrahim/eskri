@@ -28,7 +28,6 @@ const Home: NextPage = () => {
   const [userDocs,setUserDocs] = useState([]);
   const [desc,setDesc] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const [refresher, setRefresher] = useState(false);
 
   const createDocument = async () => {
     if(!input) return;
@@ -57,7 +56,7 @@ const Home: NextPage = () => {
     userDocs.forEach((doc) => {
       console.log(doc.fileName)
     });
-  },[showModal,refresher]);
+  },[showModal]);
 
   function searchAndFilter() {
     let docs = userDocs;
@@ -146,7 +145,7 @@ const Home: NextPage = () => {
         </div>
         {/* listview display division */}
         <div>
-          <DocumentRows docs={searchAndFilter()} session={session} db={db} refresher={refresher} setRefresher={setRefresher}/>
+          <DocumentRows docs={searchAndFilter()} session={session} db={db}/>
         </div>
       </section>
     </div>
