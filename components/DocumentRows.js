@@ -43,9 +43,10 @@ export default function DocumentRows(props) {
   const showItem = (item) => {
     return (
       <div key={item.fileName} id={item.fileName} className="flex items-center p-4 rounded-lg hover:bg-gray-100 text-gray-700 text-sm cursor-pointer max-w-3xl mx-auto">
-        <Icon name="article" size="3xl" color="yellow" onClick={() => router.push(`doc/${item.fileName}`)} />
-        <p className="flex-grow pl-5 w-10 pr-10 truncate" onClick={() => router.push(`doc/${item.fileName}`)}>{item.fileName}</p>
-        <p className="pr-5 test-sm" onClick={() => router.push(`doc/${item.fileName}`)}>{item.timestamp}</p>
+        {/*{() => router.push(`doc/${item.fileName}`)} USE THIS GUY LATER WHEN READY TO IMPLEMENT IT FULLY*/}
+        <Icon name="article" size="3xl" color="yellow" onClick={() => {props.setSelectedItem(item.fileName); props.setTextEditorIsOpen(true)}} />
+        <p className="flex-grow pl-5 w-10 pr-10 truncate" onClick={() => {props.setSelectedItem(item.fileName); props.setTextEditorIsOpen(true)}} >{item.fileName}</p>
+        <p className="pr-5 test-sm" onClick={() => {props.setSelectedItem(item.fileName); props.setTextEditorIsOpen(true)}} >{item.timestamp}</p>
         <Button
           color="gray"
           buttonType="outline"

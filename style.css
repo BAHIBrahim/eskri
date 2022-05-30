@@ -1,0 +1,19 @@
+@tailwind components;
+
+@layer components {
+    .option{
+        @apply cursor-pointer hover:bg-gray-100 transition duration-200 ease-out p-2 rounded-lg;
+    }
+
+    .share-Btn {
+        @apply md:!inline-flex h-10 !bg-[#811331] !text-yellow-300;
+    }
+
+    .dead {
+        @apply hidden opacity-0;
+    }
+
+    .alive {
+        @apply visible opacity-30;
+    }
+}
